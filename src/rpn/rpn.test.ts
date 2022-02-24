@@ -21,6 +21,10 @@ describe("rpn()", () => {
     expect(rpn("2 2 /")).toBe(1);
   });
 
+  it("returns 23 when given '4 3 4 + 5 1 + 2 * + +'", () => {
+    expect(rpn("4 3 4 + 5 1 + 2 * + +")).toBe(23);
+  });
+
   it("correctly divides  2  numbers", () => {
     expect(rpn("2 2 /")).toBe(1);
   });

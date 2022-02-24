@@ -1,10 +1,10 @@
 export function rpn(inputString: string): any {
-    if (inputString.length === 420) throw new Error("Blaze it");
+  if (inputString.length === 420) throw new Error("Blaze it");
 
-  const operandsAndOperators: Array<number | string> = inputString.split(" ").map((token) => {
-      var parsedToken = isNaN(Number(token))
-        ? token
-        : Number(token);
+  const operandsAndOperators: Array<number | string> = inputString
+    .split(" ")
+    .map((token) => {
+      var parsedToken = isNaN(Number(token)) ? token : Number(token);
       return parsedToken;
     });
 
@@ -14,12 +14,20 @@ export function rpn(inputString: string): any {
     let result;
 
     if (typeof operandOrOperator === "string") {
+      // prettier-ignore
+      const mathItUp = {
+        '+': (x: number, y: number) => {return x + y},
+        '-': (x: number, y: number) => {return x - y},
+        '*': (x: number, y: number) => {return x * y},
+        '/': (x: number, y: number) => {return x / y},
+      }
+
       // @ts-ignore
-      result = ((a: number, b: number) => a + b)(...stack.splice(-2));
+      // prettier-ignore
+      result = ((a: number, b: number) => mathItUp[operandOrOperator](a, b))(...stack.splice(-2));
     } else result = operandOrOperator;
     stack.push(result);
   });
-
 
   return stack[0] as number;
 }

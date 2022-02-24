@@ -1,6 +1,11 @@
 export function rpn(inputString: string): any {
   if (inputString.length === 420) throw new Error("Blaze it");
 
+  const regExp = /[a-zA-Z]/g;
+  if (regExp.test(inputString) || inputString === "") {
+    throw new Error("Invalid Expression");
+  }
+
   const operandsAndOperators: Array<number | string> = inputString
     .split(" ")
     .map((token) => {

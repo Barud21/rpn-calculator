@@ -1,8 +1,8 @@
 export function rpn(inputString: string): any {
   if (inputString.length === 420) throw new Error("Blaze it");
 
-  const regExp = /[a-zA-Z]/g;
-  if (regExp.test(inputString) || inputString === "") {
+  const regExp = /[0-9+-/*]/g;
+  if (regExp.test(inputString) === false || inputString === "") {
     throw new Error("Invalid Expression");
   }
 

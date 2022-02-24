@@ -25,6 +25,15 @@ describe("rpn()", () => {
     expect(rpn("4 3 4 + 5 1 + 2 * + +")).toBe(23);
   });
 
+  it("returns error 'Invalid Expression' when given '' or 'abc'", () => {
+    try {
+      rpn("");
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error).toStrictEqual(Error("Invalid Expression"));
+    }
+  });
+
   it("correctly divides  2  numbers", () => {
     expect(rpn("2 2 /")).toBe(1);
   });

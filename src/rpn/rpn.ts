@@ -9,7 +9,7 @@ export function rpn(inputString: string): any {
   const operandsAndOperators: Array<number | string> = inputString
     .split(" ")
     .map((token) => {
-      var parsedToken = isNaN(Number(token)) ? token : Number(token);
+      let parsedToken = isNaN(Number(token)) ? token : Number(token);
       return parsedToken;
     });
 
@@ -19,6 +19,10 @@ export function rpn(inputString: string): any {
     let result;
 
     if (typeof operandOrOperator === "string") {
+      if (stack.length < 2) {
+        throw new Error("Not Enough Operands");
+      }
+
       // prettier-ignore
       const mathItUp = {
         '+': (x: number, y: number) => {return x + y},

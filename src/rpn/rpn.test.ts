@@ -52,6 +52,15 @@ describe("rpn()", () => {
     }
   });
 
+  it("returns error 'Not Enough Operands' when given '1 2 + + 3'", () => {
+    try {
+      rpn("1 2 + + 3");
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error).toStrictEqual(Error("Not Enough Operands"));
+    }
+  });
+
   it("correctly divides 2 numbers", () => {
     expect(rpn("2 2 /")).toBe(1);
   });

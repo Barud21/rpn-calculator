@@ -1,7 +1,7 @@
 import { rpn } from "./rpn";
 
 describe("rpn()", () => {
-  it("returs number when passed", () => {
+  it("returns number when passed", () => {
     expect(rpn("2")).toBe(2);
   });
 
@@ -25,7 +25,7 @@ describe("rpn()", () => {
     expect(rpn("4 3 4 + 5 1 + 2 * + +")).toBe(23);
   });
 
-  it("returns error 'Invalid Expression' when given '' or 'abc'", () => {
+  it("returns error 'Invalid Expression' when given ''", () => {
     try {
       rpn("");
     } catch (error) {
@@ -34,7 +34,16 @@ describe("rpn()", () => {
     }
   });
 
-  it("correctly divides  2  numbers", () => {
+  it("returns error 'Invalid Expression' when given 'abc'", () => {
+    try {
+      rpn("abc");
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error).toStrictEqual(Error("Invalid Expression"));
+    }
+  });
+
+  it("correctly divides 2 numbers", () => {
     expect(rpn("2 2 /")).toBe(1);
   });
 });

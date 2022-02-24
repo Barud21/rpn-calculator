@@ -17,6 +17,10 @@ describe("rpn()", () => {
     expect(rpn("2 2 + 3 *")).toBe(12);
   });
 
+  it("returns 1 when given '2 2 /'", () => {
+    expect(rpn("2 2 /")).toBe(1);
+  });
+
   it("correctly divides  2  numbers", () => {
     expect(rpn("2 2 /")).toBe(1);
   });

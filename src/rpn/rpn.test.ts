@@ -73,4 +73,13 @@ describe("rpn()", () => {
       expect(error).toStrictEqual(Error("Invalid Operation"));
     }
   });
+
+  it("returns error 'Invalid Operation' when there is division by 0", () => {
+    try {
+      rpn("1 1 1 - /");
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error).toStrictEqual(Error("Invalid Operation"));
+    }
+  });
 });

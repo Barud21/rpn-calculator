@@ -40,5 +40,9 @@ export function rpn(inputString: string): any {
     stack.push(result);
   });
 
+  if (stack.length > 1) {
+    throw new Error("Not Enough Operators");
+  }
+
   return stack[0] as number;
 }

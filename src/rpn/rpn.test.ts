@@ -64,4 +64,13 @@ describe("rpn()", () => {
   it("correctly divides 2 numbers", () => {
     expect(rpn("2 2 /")).toBe(1);
   });
+
+  it("returns error 'Invalid Operation' when dividing by 0", () => {
+    try {
+      rpn("1 0 /");
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error).toStrictEqual(Error("Invalid Operation"));
+    }
+  });
 });

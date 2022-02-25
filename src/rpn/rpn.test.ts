@@ -82,4 +82,14 @@ describe("rpn()", () => {
       expect(error).toStrictEqual(Error("Invalid Operation"));
     }
   });
+
+  it("returns error 'Not Enough Operators' when given '1 2 3 +'", () => {
+    try {
+      rpn("1 2 3 +");
+      expect(true).toBe(false);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error).toStrictEqual(Error("Not Enough Operators"));
+    }
+  });
 });

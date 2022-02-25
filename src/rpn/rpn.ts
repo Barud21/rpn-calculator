@@ -21,10 +21,12 @@ export function rpn(inputString: string): any {
     if (typeof operandOrOperator === "string") {
       if (stack.length < 2) {
         throw new Error("Not Enough Operands");
+      } else if (operandOrOperator === "/" && stack.at(-1) === 0) {
+        throw new Error("Invalid Operation");
       }
 
       // prettier-ignore
-      const mathItUp = {
+      const mathItUp: object = {
         '+': (x: number, y: number) => {return x + y},
         '-': (x: number, y: number) => {return x - y},
         '*': (x: number, y: number) => {return x * y},

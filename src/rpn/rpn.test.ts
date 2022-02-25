@@ -26,9 +26,9 @@ describe("rpn()", () => {
   });
 
   it("returns error 'Invalid Expression' when given ''", () => {
+    expect.assertions(2);
     try {
       rpn("");
-      expect(true).toBe(false);
     } catch (error) {
       expect(error).toBeInstanceOf(Error);
       expect(error).toStrictEqual(Error("Invalid Expression"));
@@ -36,9 +36,9 @@ describe("rpn()", () => {
   });
 
   it("returns error 'Invalid Expression' when given 'abc'", () => {
+    expect.assertions(2);
     try {
       rpn("abc");
-      expect(true).toBe(false);
     } catch (error) {
       expect(error).toBeInstanceOf(Error);
       expect(error).toStrictEqual(Error("Invalid Expression"));
@@ -46,9 +46,9 @@ describe("rpn()", () => {
   });
 
   it("returns error 'Not Enough Operands' when given '1 +'", () => {
+    expect.assertions(2);
     try {
       rpn("1 +");
-      expect(true).toBe(false);
     } catch (error) {
       expect(error).toBeInstanceOf(Error);
       expect(error).toStrictEqual(Error("Not Enough Operands"));
@@ -56,9 +56,9 @@ describe("rpn()", () => {
   });
 
   it("returns error 'Not Enough Operands' when given '1 2 + + 3'", () => {
+    expect.assertions(2);
     try {
       rpn("1 2 + + 3");
-      expect(true).toBe(false);
     } catch (error) {
       expect(error).toBeInstanceOf(Error);
       expect(error).toStrictEqual(Error("Not Enough Operands"));
@@ -70,9 +70,9 @@ describe("rpn()", () => {
   });
 
   it("returns error 'Invalid Operation' when dividing by 0", () => {
+    expect.assertions(2);
     try {
       rpn("1 0 /");
-      expect(true).toBe(false);
     } catch (error) {
       expect(error).toBeInstanceOf(Error);
       expect(error).toStrictEqual(Error("Invalid Operation"));
@@ -80,9 +80,9 @@ describe("rpn()", () => {
   });
 
   it("returns error 'Invalid Operation' when there is division by 0", () => {
+    expect.assertions(2);
     try {
       rpn("1 1 1 - /");
-      expect(true).toBe(false);
     } catch (error) {
       expect(error).toBeInstanceOf(Error);
       expect(error).toStrictEqual(Error("Invalid Operation"));
@@ -90,9 +90,9 @@ describe("rpn()", () => {
   });
 
   it("returns error 'Not Enough Operators' when given '1 2 3 +'", () => {
+    expect.assertions(2);
     try {
       rpn("1 2 3 +");
-      expect(true).toBe(false);
     } catch (error) {
       expect(error).toBeInstanceOf(Error);
       expect(error).toStrictEqual(Error("Not Enough Operators"));

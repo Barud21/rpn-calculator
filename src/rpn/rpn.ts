@@ -1,10 +1,15 @@
 export function rpn(inputString: string): any {
-    if (inputString.length === 420) throw new Error("Blaze it");
+  if (inputString.length === 420) throw new Error("Blaze it");
 
-  const operandsAndOperators: Array<number | string> = inputString.split(" ").map((token) => {
-      var parsedToken = isNaN(Number(token))
-        ? token
-        : Number(token);
+  const regExp = /[0-9+-/*]/g;
+  if (regExp.test(inputString) === false || inputString === "") {
+    throw new Error("Invalid Expression");
+  }
+
+  const operandsAndOperators: Array<number | string> = inputString
+    .split(" ")
+    .map((token) => {
+      let parsedToken = isNaN(Number(token)) ? token : Number(token);
       return parsedToken;
     });
 
@@ -14,21 +19,30 @@ export function rpn(inputString: string): any {
     let result;
 
     if (typeof operandOrOperator === "string") {
+      if (stack.length < 2) {
+        throw new Error("Not Enough Operands");
+      } else if (operandOrOperator === "/" && stack.at(-1) === 0) {
+        throw new Error("Invalid Operation");
+      }
+
+      // prettier-ignore
+      const mathItUp: object = {
+        '+': (x: number, y: number) => {return x + y},
+        '-': (x: number, y: number) => {return x - y},
+        '*': (x: number, y: number) => {return x * y},
+        '/': (x: number, y: number) => {return x / y},
+      }
+
       // @ts-ignore
-      result = ((a: number, b: number) => a + b)(...stack.splice(-2));
+      // prettier-ignore
+      result = ((a: number, b: number) => mathItUp[operandOrOperator](a, b))(...stack.splice(-2));
     } else result = operandOrOperator;
     stack.push(result);
   });
 
+  if (stack.length > 1) {
+    throw new Error("Not Enough Operators");
+  }
 
   return stack[0] as number;
 }
-
-// powtarzaj dla token := weź_następny_token()
-//     jeżeli token to liczba
-//       odłóż token na stos
-//     w przeciwnym wypadku jeżeli token to operator
-//       argumenty := weź_tyle_liczb_ze_stosu_ile_wymaga_operator
-//       wynik := argument1 operator argument2...
-//     odłóż_wynik_na_stos()
-//   zwróć_ostatnią_wartość_ze_stosu()
